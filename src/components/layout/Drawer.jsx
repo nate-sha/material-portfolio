@@ -20,8 +20,8 @@ function Drawer({ mobileOpen, handleDrawerToggle, navItemList, name }) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Avatar
-        alt="Profile Picture"
-        src="/src/assets/profile.jpeg"
+        alt="Nate Shaar"
+        src="../../assets/media/profile.jpeg"
         sx={{ width: 100, height: 100, margin: "auto", mt: 2 }}
       />
       <Typography
