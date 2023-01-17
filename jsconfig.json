@@ -1,0 +1,7 @@
+/* eslint-disable */
+{
+  "compilerOptions": {
+    "baseUrl": "src"
+  },
+  "include": ["src"]
+}
