@@ -18,7 +18,8 @@ export const skills = [
   },
   {
     name: "Cloud Computing",
-    description: "Containerization, CI/CD, DevOps, SaaS",
+    description:
+      "Google Cloud, IBM Cloud, Containerization, CI/CD, DevOps, SaaS",
   },
   {
     name: "Languages",

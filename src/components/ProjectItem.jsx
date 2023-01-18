@@ -9,7 +9,6 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 function ProjectItem({ name, description, githubUrl, bodyItems, stackItems }) {
@@ -30,14 +29,15 @@ function ProjectItem({ name, description, githubUrl, bodyItems, stackItems }) {
             pl: 2,
           }}
         >
-          {stackItems.map((item, index) => (
-            <ListItem key={`${item.title}-${index}`} disablePadding>
-              <ListItemText>
-                <strong>{item.title}: </strong>
-                {item.description}
-              </ListItemText>
-            </ListItem>
-          ))}
+          {stackItems &&
+            stackItems.map((item, index) => (
+              <ListItem key={`${item.title}-${index}`} disablePadding>
+                <ListItemText>
+                  <strong>{item.title}: </strong>
+                  {item.description}
+                </ListItemText>
+              </ListItem>
+            ))}
         </List>
         {bodyItems.map((item, index) =>
           // If the passed item content is an array, render a list

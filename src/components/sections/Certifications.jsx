@@ -1,5 +1,12 @@
 import React from "react";
-import { Typography, List, ListItem, ListItemText, Chip } from "@mui/material";
+import {
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Chip,
+  Box,
+} from "@mui/material";
 
 import Section from "../Section";
 import { certifications } from "../../content/certifications";
@@ -11,8 +18,9 @@ function Certifications() {
           <ListItem
             key={`${certification.name}-${index}`}
             sx={{
-              display: "flex",
-              justifyContent: "space-between",
+              display: "flex-start",
+              // justifyContent: "space-between",
+              // alignItems: "space-between",
             }}
           >
             <ListItemText>
@@ -24,15 +32,27 @@ function Certifications() {
                 }}
               >
                 {certification.name}
-                {certification.isCompleted ? (
-                  <Chip size="small" label="Completed" sx={{ ml: 1 }} />
-                ) : (
-                  <Chip size="small" label="In Progress" sx={{ ml: 1 }} />
-                )}
+                <Box
+                  sx={{
+                    display: { xs: "none", sm: "none", md: "block" },
+                  }}
+                >
+                  {certification.isCompleted ? (
+                    <Chip size="small" label="Completed" sx={{ ml: 1 }} />
+                  ) : (
+                    <Chip size="small" label="In Progress" sx={{ ml: 1 }} />
+                  )}
+                </Box>
               </Typography>
               <Typography>{certification.description}</Typography>
             </ListItemText>
-            <Typography>{certification.date}</Typography>
+            <Box
+              sx={{
+                display: { xs: "none", sm: "none", md: "block" },
+              }}
+            >
+              <Typography>{certification.date}</Typography>
+            </Box>
           </ListItem>
         ))}
       </List>

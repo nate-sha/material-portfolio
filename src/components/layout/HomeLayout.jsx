@@ -1,6 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { Box, Toolbar } from "@mui/material";
+import { Box, Toolbar, Container } from "@mui/material";
 
 import AppBar from "./AppBar";
 import Drawer from "./Drawer";
@@ -11,13 +11,13 @@ export const navItemList = [
     name: "Projects",
   },
   {
-    name: "Skills",
-  },
-  {
     name: "Certifications",
   },
   {
     name: "Education",
+  },
+  {
+    name: "Skills",
   },
 ];
 
@@ -41,10 +41,11 @@ function HomeLayout({ children }) {
         navItemList={navItemList}
         name={name}
       />
-      <Box component="main" sx={{ p: 3 }}>
+      <Container maxWidth="md" sx={{ p: 3 }}>
+        {/* Add toolbar to fix the position of the main content under the fixed AppBar */}
         <Toolbar />
         {children}
-      </Box>
+      </Container>
     </Box>
   );
 }
