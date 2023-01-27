@@ -5,6 +5,8 @@ import Projects from "./components/sections/Projects";
 import Education from "./components/sections/Education";
 import Skills from "./components/sections/Skills";
 import Certifications from "./components/sections/Certifications";
+import dotenv from "dotenv";
+dotenv.config();
 
 function App() {
   return (

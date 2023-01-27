@@ -1,5 +1,11 @@
 export const certifications = [
   {
+    name: "Applied Data Science Program",
+    description: "MIT Professional Education",
+    date: "2021 - Present",
+    isCompleted: false,
+  },
+  {
     name: "Google Cloud Certified - Associate Cloud Engineer",
     description: "Google Cloud",
     date: "2023 - Present",

@@ -36,7 +36,7 @@ function AppBar({ name, handleDrawerToggle }) {
         >
           {name}
         </Typography>
-        <Box sx={{ display: { xs: "flex", sm: "block" } }}>
+        <Box sx={{ display: { xs: "none", sm: "block" } }}>
           <SocialIcons />
         </Box>
       </Toolbar>
