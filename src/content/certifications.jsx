@@ -19,7 +19,7 @@ export const certifications = [
   },
   {
     name: "JavaScript Development Bootcamp",
-    description: "Udemy",
+    description: "General Assembly - Boston",
     date: "October 2019",
     isCompleted: true,
   },
