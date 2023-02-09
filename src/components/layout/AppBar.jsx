@@ -45,7 +45,7 @@ function AppBar({ name, handleDrawerToggle }) {
 }
 
 AppBar.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   handleDrawerToggle: PropTypes.func.isRequired,
 };
 

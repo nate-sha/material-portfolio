@@ -81,7 +81,7 @@ ProjectItem.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   githubUrl: PropTypes.string,
-  techStack: PropTypes.arrayOf(PropTypes.string).isRequired,
+  techStack: PropTypes.arrayOf(PropTypes.string),
   listItems: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,

@@ -1,4 +1,5 @@
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import {
   Typography,
   List,
@@ -6,55 +7,74 @@ import {
   ListItemText,
   Chip,
   Box,
+  Skeleton,
 } from "@mui/material";
 
+import getCollection from "../../utils/getCollection";
 import Section from "../Section";
-import { certifications } from "../../content/certifications";
+
 function Certifications() {
+  const {
+    data: certifications,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["certifications"],
+    queryFn: () => getCollection("certifications"),
+    useErrorBoundary: true,
+  });
+
+  if (isError) {
+    return <div>Error: {certifications.error}</div>;
+  }
   return (
     <Section title="Certifications">
       <List>
-        {certifications.map((certification, index) => (
-          <ListItem
-            key={`${certification.name}-${index}`}
-            sx={{
-              display: "flex-start",
-              // justifyContent: "space-between",
-              // alignItems: "space-between",
-            }}
-          >
-            <ListItemText>
-              <Typography
-                variant="h6"
+        {isLoading ? (
+          <Skeleton variant="rectangular" />
+        ) : (
+          <Box>
+            {certifications.map((certification, index) => (
+              <ListItem
+                key={`${certification.name}-${index}`}
                 sx={{
-                  display: "flex",
-                  alignItems: "center",
+                  display: "flex-start",
                 }}
               >
-                {certification.name}
+                <ListItemText>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {certification.name}
+                    <Box
+                      sx={{
+                        display: { xs: "none", sm: "none", md: "block" },
+                      }}
+                    >
+                      {certification.isCompleted ? (
+                        <Chip size="small" label="Completed" sx={{ ml: 1 }} />
+                      ) : (
+                        <Chip size="small" label="In Progress" sx={{ ml: 1 }} />
+                      )}
+                    </Box>
+                  </Typography>
+                  <Typography>{certification.description}</Typography>
+                </ListItemText>
                 <Box
                   sx={{
                     display: { xs: "none", sm: "none", md: "block" },
                   }}
                 >
-                  {certification.isCompleted ? (
-                    <Chip size="small" label="Completed" sx={{ ml: 1 }} />
-                  ) : (
-                    <Chip size="small" label="In Progress" sx={{ ml: 1 }} />
-                  )}
+                  <Typography>{certification.date}</Typography>
                 </Box>
-              </Typography>
-              <Typography>{certification.description}</Typography>
-            </ListItemText>
-            <Box
-              sx={{
-                display: { xs: "none", sm: "none", md: "block" },
-              }}
-            >
-              <Typography>{certification.date}</Typography>
-            </Box>
-          </ListItem>
-        ))}
+              </ListItem>
+            ))}
+          </Box>
+        )}
       </List>
     </Section>
   );

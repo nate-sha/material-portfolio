@@ -1,10 +1,25 @@
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import Section from "../Section";
 import ProjectItem from "../ProjectItem";
-import projects from "../../content/projects";
-import { Alert } from "@mui/material";
+import getCollection from "../../utils/getCollection";
+import { Alert, Skeleton, Box } from "@mui/material";
 
 function Projects() {
+  const {
+    data: projects,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["projects"],
+    queryFn: () => getCollection("Projects"),
+    useErrorBoundary: true,
+  });
+
+  if (isError) {
+    return <div>Error: {projects.error}</div>;
+  }
+
   return (
     <Section title="Projects" key="alert-box">
       {/* Add an alert box */}
@@ -15,17 +30,23 @@ function Projects() {
           🙂
         </span>
       </Alert>
-      {projects.map((project, index) => (
-        <ProjectItem
-          key={`${project.name}-${index}`}
-          name={project.name}
-          description={project.description}
-          githubUrl={project.githubUrl}
-          bodyItems={project.bodyItems}
-          techStack={project.techStack}
-          stackItems={project.stackItems}
-        />
-      ))}
+      {isLoading ? (
+        <Skeleton variant="rectangular" />
+      ) : (
+        <Box>
+          {projects.map((project, index) => (
+            <ProjectItem
+              key={`${project.name}-${index}`}
+              name={project.name}
+              description={project.description}
+              githubUrl={project.githubUrl}
+              bodyItems={project.bodyItems}
+              techStack={project.techStack}
+              stackItems={project.stackItems}
+            />
+          ))}
+        </Box>
+      )}
     </Section>
   );
 }

@@ -1,4 +1,5 @@
 # build environment
+
 FROM node:14-alpine as react-build
 WORKDIR /app
 COPY . ./

@@ -81,7 +81,7 @@ Drawer.propTypes = {
   mobileOpen: PropTypes.bool.isRequired,
   handleDrawerToggle: PropTypes.func.isRequired,
   navItemList: PropTypes.array.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
 };
 
 export default Drawer;

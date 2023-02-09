@@ -1,10 +1,16 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { Box, Toolbar, Container } from "@mui/material";
-
+import { useQuery } from "@tanstack/react-query";
+import {
+  Box,
+  Toolbar,
+  Container,
+  Backdrop,
+  CircularProgress,
+} from "@mui/material";
 import AppBar from "./AppBar";
 import Drawer from "./Drawer";
-import { social } from "../../content/social";
+import getCollection from "../../utils/getCollection";
 
 export const navItemList = [
   {
@@ -22,16 +28,40 @@ export const navItemList = [
 ];
 
 function HomeLayout({ children }) {
-  const { name } = social;
+  const {
+    data: profile,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["profile"],
+    queryFn: () => getCollection("social"),
+    useErrorBoundary: true,
+  });
+
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
+  if (isLoading) {
+    return (
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    );
+  }
+
+  if (isError) {
+    return <div>Error: profile.error</div>;
+  }
+
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar
-        name={name}
+        name={profile[0].name}
         handleDrawerToggle={handleDrawerToggle}
         navItemList={navItemList}
       />
@@ -39,7 +69,7 @@ function HomeLayout({ children }) {
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}
         navItemList={navItemList}
-        name={name}
+        name={profile[0].name}
       />
       <Container maxWidth="md" sx={{ p: 3 }}>
         {/* Add toolbar to fix the position of the main content under the fixed AppBar */}
